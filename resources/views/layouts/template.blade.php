@@ -130,6 +130,14 @@
 							</ul>
 						</li>
 						<li class="nav-item">
+							<a href="{{ route('barang.index') }}" class="nav-link {{ request()->is('barang') ? 'active' : '' }}">
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								Barang
+							</p>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
 							<p>
@@ -152,12 +160,12 @@
 					<div class="container-fluid">
 						<div class="row mb-2">
 							<div class="col-sm-6">
-								<h1 class="m-0">Starter Page</h1>
+								<h1 class="m-0">@yield('title')</h1>
 							</div><!-- /.col -->
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Starter Page</li>
+								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+								<li class="breadcrumb-item active">@yield('title')</li>
 								</ol>
 							</div><!-- /.col -->
 						</div><!-- /.row -->
@@ -167,7 +175,23 @@
 
 				<!-- Main content -->
 				<div class="content">
+					@include('sweetalert::alert')
+					<div class="container-fluid">
+						@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+
+					</div>
+
+					
 					@yield('content')
+					
 				</div>
 				<!-- /.content -->
 			</div>
@@ -188,5 +212,6 @@
 		<script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
 		<script src="{{ asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 		<script src="{{ asset('template/dist/js/adminlte.min.js') }}"></script>
+		{{-- @stack('scripts') --}}
 	</body>
 </html>

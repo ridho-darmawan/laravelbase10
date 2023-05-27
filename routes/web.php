@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,8 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {  
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware(['admin'])->group(function () {        
+        Route::resource('barang', BarangController::class);
     });
 });
 
